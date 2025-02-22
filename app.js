@@ -4,6 +4,7 @@ import logger from "morgan";
 
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
+import itemsRouter from "./routes/items.js"; // Import the new route
 
 import mongoose from 'mongoose';
 mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost/your-app-name');
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/items", itemsRouter); // Use the new route
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
