@@ -7,7 +7,13 @@ import usersRouter from "./routes/users.js";
 import itemsRouter from "./routes/items.js"; // Import the new route
 
 import mongoose from 'mongoose';
-mongoose.connect(process.env.DATABASE_URL || 'mongodb://localhost/your-app-name');
+
+mongoose.connect(process.env.DATABASE_URL || null);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("Connected to the database");
+});
 
 const app = express();
 
